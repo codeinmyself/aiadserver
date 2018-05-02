@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xmu.aiad.dao.AuthorizeMapper" >
+  <resultMap id="BaseResultMap" type="com.xmu.aiad.model.Authorize" >
+    <id column="auth_id" property="authId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="login_channel" property="loginChannel" jdbcType="TINYINT" />
+    <result column="identify" property="identify" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    auth_id, user_id, login_channel, identify, token
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from aiad_authorize
+    where auth_id = #{authId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from aiad_authorize
+    where auth_id = #{authId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xmu.aiad.model.Authorize" >
+    insert into aiad_authorize (auth_id, user_id, login_channel, 
+      identify, token)
+    values (#{authId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{loginChannel,jdbcType=TINYINT}, 
+      #{identify,jdbcType=VARCHAR}, #{token,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xmu.aiad.model.Authorize" >
+    insert into aiad_authorize
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="authId != null" >
+        auth_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="loginChannel != null" >
+        login_channel,
+      </if>
+      <if test="identify != null" >
+        identify,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="authId != null" >
+        #{authId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="loginChannel != null" >
+        #{loginChannel,jdbcType=TINYINT},
+      </if>
+      <if test="identify != null" >
+        #{identify,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xmu.aiad.model.Authorize" >
+    update aiad_authorize
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="loginChannel != null" >
+        login_channel = #{loginChannel,jdbcType=TINYINT},
+      </if>
+      <if test="identify != null" >
+        identify = #{identify,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=CHAR},
+      </if>
+    </set>
+    where auth_id = #{authId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xmu.aiad.model.Authorize" >
+    update aiad_authorize
+    set user_id = #{userId,jdbcType=BIGINT},
+      login_channel = #{loginChannel,jdbcType=TINYINT},
+      identify = #{identify,jdbcType=VARCHAR},
+      token = #{token,jdbcType=CHAR}
+    where auth_id = #{authId,jdbcType=BIGINT}
+  </update>
+</mapper>

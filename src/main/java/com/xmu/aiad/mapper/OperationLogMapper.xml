@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xmu.aiad.dao.OperationLogMapper" >
+  <resultMap id="BaseResultMap" type="com.xmu.aiad.model.OperationLog" >
+    <id column="operation_id" property="operationId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="product_type" property="productType" jdbcType="INTEGER" />
+    <result column="ad_style" property="adStyle" jdbcType="INTEGER" />
+    <result column="ad_time" property="adTime" jdbcType="INTEGER" />
+    <result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+    <result column="is_satasfied" property="isSatasfied" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    operation_id, user_id, product_type, ad_style, ad_time, video_url, is_satasfied
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from aiad_operation_log
+    where operation_id = #{operationId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from aiad_operation_log
+    where operation_id = #{operationId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xmu.aiad.model.OperationLog" >
+    insert into aiad_operation_log (operation_id, user_id, product_type, 
+      ad_style, ad_time, video_url, 
+      is_satasfied)
+    values (#{operationId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{productType,jdbcType=INTEGER}, 
+      #{adStyle,jdbcType=INTEGER}, #{adTime,jdbcType=INTEGER}, #{videoUrl,jdbcType=VARCHAR}, 
+      #{isSatasfied,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xmu.aiad.model.OperationLog" >
+    insert into aiad_operation_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="operationId != null" >
+        operation_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="productType != null" >
+        product_type,
+      </if>
+      <if test="adStyle != null" >
+        ad_style,
+      </if>
+      <if test="adTime != null" >
+        ad_time,
+      </if>
+      <if test="videoUrl != null" >
+        video_url,
+      </if>
+      <if test="isSatasfied != null" >
+        is_satasfied,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="operationId != null" >
+        #{operationId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="productType != null" >
+        #{productType,jdbcType=INTEGER},
+      </if>
+      <if test="adStyle != null" >
+        #{adStyle,jdbcType=INTEGER},
+      </if>
+      <if test="adTime != null" >
+        #{adTime,jdbcType=INTEGER},
+      </if>
+      <if test="videoUrl != null" >
+        #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isSatasfied != null" >
+        #{isSatasfied,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xmu.aiad.model.OperationLog" >
+    update aiad_operation_log
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="productType != null" >
+        product_type = #{productType,jdbcType=INTEGER},
+      </if>
+      <if test="adStyle != null" >
+        ad_style = #{adStyle,jdbcType=INTEGER},
+      </if>
+      <if test="adTime != null" >
+        ad_time = #{adTime,jdbcType=INTEGER},
+      </if>
+      <if test="videoUrl != null" >
+        video_url = #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isSatasfied != null" >
+        is_satasfied = #{isSatasfied,jdbcType=TINYINT},
+      </if>
+    </set>
+    where operation_id = #{operationId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xmu.aiad.model.OperationLog" >
+    update aiad_operation_log
+    set user_id = #{userId,jdbcType=BIGINT},
+      product_type = #{productType,jdbcType=INTEGER},
+      ad_style = #{adStyle,jdbcType=INTEGER},
+      ad_time = #{adTime,jdbcType=INTEGER},
+      video_url = #{videoUrl,jdbcType=VARCHAR},
+      is_satasfied = #{isSatasfied,jdbcType=TINYINT}
+    where operation_id = #{operationId,jdbcType=BIGINT}
+  </update>
+</mapper>

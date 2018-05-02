@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xmu.aiad.dao.UserExtMapper" >
+  <resultMap id="BaseResultMap" type="com.xmu.aiad.model.UserExt" >
+    <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="TINYINT" />
+    <result column="personal_signature" property="personalSignature" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, address, profession, sex, personal_signature, birthday
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from aiad_user_ext
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from aiad_user_ext
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xmu.aiad.model.UserExt" >
+    insert into aiad_user_ext (user_id, address, profession, 
+      sex, personal_signature, birthday
+      )
+    values (#{userId,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=TINYINT}, #{personalSignature,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xmu.aiad.model.UserExt" >
+    insert into aiad_user_ext
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="personalSignature != null" >
+        personal_signature,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="personalSignature != null" >
+        #{personalSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xmu.aiad.model.UserExt" >
+    update aiad_user_ext
+    <set >
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="personalSignature != null" >
+        personal_signature = #{personalSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xmu.aiad.model.UserExt" >
+    update aiad_user_ext
+    set address = #{address,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      personal_signature = #{personalSignature,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xmu.aiad.dao.MaterialMapper" >
+  <resultMap id="BaseResultMap" type="com.xmu.aiad.model.Material" >
+    <id column="material_id" property="materialId" jdbcType="BIGINT" />
+    <result column="style" property="style" jdbcType="SMALLINT" />
+    <result column="brightness" property="brightness" jdbcType="INTEGER" />
+    <result column="rgb" property="rgb" jdbcType="INTEGER" />
+    <result column="use_count" property="useCount" jdbcType="INTEGER" />
+    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    material_id, style, brightness, rgb, use_count, file_url, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from aiad_material
+    where material_id = #{materialId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from aiad_material
+    where material_id = #{materialId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xmu.aiad.model.Material" >
+    insert into aiad_material (material_id, style, brightness, 
+      rgb, use_count, file_url, 
+      create_time)
+    values (#{materialId,jdbcType=BIGINT}, #{style,jdbcType=SMALLINT}, #{brightness,jdbcType=INTEGER}, 
+      #{rgb,jdbcType=INTEGER}, #{useCount,jdbcType=INTEGER}, #{fileUrl,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xmu.aiad.model.Material" >
+    insert into aiad_material
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="materialId != null" >
+        material_id,
+      </if>
+      <if test="style != null" >
+        style,
+      </if>
+      <if test="brightness != null" >
+        brightness,
+      </if>
+      <if test="rgb != null" >
+        rgb,
+      </if>
+      <if test="useCount != null" >
+        use_count,
+      </if>
+      <if test="fileUrl != null" >
+        file_url,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="materialId != null" >
+        #{materialId,jdbcType=BIGINT},
+      </if>
+      <if test="style != null" >
+        #{style,jdbcType=SMALLINT},
+      </if>
+      <if test="brightness != null" >
+        #{brightness,jdbcType=INTEGER},
+      </if>
+      <if test="rgb != null" >
+        #{rgb,jdbcType=INTEGER},
+      </if>
+      <if test="useCount != null" >
+        #{useCount,jdbcType=INTEGER},
+      </if>
+      <if test="fileUrl != null" >
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xmu.aiad.model.Material" >
+    update aiad_material
+    <set >
+      <if test="style != null" >
+        style = #{style,jdbcType=SMALLINT},
+      </if>
+      <if test="brightness != null" >
+        brightness = #{brightness,jdbcType=INTEGER},
+      </if>
+      <if test="rgb != null" >
+        rgb = #{rgb,jdbcType=INTEGER},
+      </if>
+      <if test="useCount != null" >
+        use_count = #{useCount,jdbcType=INTEGER},
+      </if>
+      <if test="fileUrl != null" >
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where material_id = #{materialId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xmu.aiad.model.Material" >
+    update aiad_material
+    set style = #{style,jdbcType=SMALLINT},
+      brightness = #{brightness,jdbcType=INTEGER},
+      rgb = #{rgb,jdbcType=INTEGER},
+      use_count = #{useCount,jdbcType=INTEGER},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where material_id = #{materialId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xmu.aiad.dao.PracticeMapper" >
+  <resultMap id="BaseResultMap" type="com.xmu.aiad.model.Practice" >
+    <id column="practice_id" property="practiceId" jdbcType="BIGINT" />
+    <result column="source_file_url" property="sourceFileUrl" jdbcType="VARCHAR" />
+    <result column="destination_file_url" property="destinationFileUrl" jdbcType="VARCHAR" />
+    <result column="file_number" property="fileNumber" jdbcType="INTEGER" />
+    <result column="practice_time" property="practiceTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    practice_id, source_file_url, destination_file_url, file_number, practice_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from aiad_practice
+    where practice_id = #{practiceId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from aiad_practice
+    where practice_id = #{practiceId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xmu.aiad.model.Practice" >
+    insert into aiad_practice (practice_id, source_file_url, destination_file_url, 
+      file_number, practice_time)
+    values (#{practiceId,jdbcType=BIGINT}, #{sourceFileUrl,jdbcType=VARCHAR}, #{destinationFileUrl,jdbcType=VARCHAR}, 
+      #{fileNumber,jdbcType=INTEGER}, #{practiceTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xmu.aiad.model.Practice" >
+    insert into aiad_practice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="practiceId != null" >
+        practice_id,
+      </if>
+      <if test="sourceFileUrl != null" >
+        source_file_url,
+      </if>
+      <if test="destinationFileUrl != null" >
+        destination_file_url,
+      </if>
+      <if test="fileNumber != null" >
+        file_number,
+      </if>
+      <if test="practiceTime != null" >
+        practice_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="practiceId != null" >
+        #{practiceId,jdbcType=BIGINT},
+      </if>
+      <if test="sourceFileUrl != null" >
+        #{sourceFileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationFileUrl != null" >
+        #{destinationFileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNumber != null" >
+        #{fileNumber,jdbcType=INTEGER},
+      </if>
+      <if test="practiceTime != null" >
+        #{practiceTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xmu.aiad.model.Practice" >
+    update aiad_practice
+    <set >
+      <if test="sourceFileUrl != null" >
+        source_file_url = #{sourceFileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationFileUrl != null" >
+        destination_file_url = #{destinationFileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNumber != null" >
+        file_number = #{fileNumber,jdbcType=INTEGER},
+      </if>
+      <if test="practiceTime != null" >
+        practice_time = #{practiceTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where practice_id = #{practiceId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xmu.aiad.model.Practice" >
+    update aiad_practice
+    set source_file_url = #{sourceFileUrl,jdbcType=VARCHAR},
+      destination_file_url = #{destinationFileUrl,jdbcType=VARCHAR},
+      file_number = #{fileNumber,jdbcType=INTEGER},
+      practice_time = #{practiceTime,jdbcType=TIMESTAMP}
+    where practice_id = #{practiceId,jdbcType=BIGINT}
+  </update>
+</mapper>
